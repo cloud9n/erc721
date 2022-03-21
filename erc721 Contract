@@ -1226,7 +1226,7 @@ abstract contract ERC721URIStorage is ERC721 {
     }
 }
 
-// File: contract-74cc49ee18.sol
+// File: alpNFT.sol
 
 
 pragma solidity ^0.8.4;
@@ -1235,7 +1235,7 @@ pragma solidity ^0.8.4;
 
 
 
-contract AlpNFT is ERC721, ERC721URIStorage, Ownable {
+contract alp is ERC721, ERC721URIStorage, Ownable {
     using Counters for Counters.Counter;
 
     Counters.Counter private _tokenIdCounter;
