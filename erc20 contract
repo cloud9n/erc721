@@ -1,6 +1,5 @@
 
-
-// File: @openzeppelin/contracts/utils/Context.sol
+// File: @openzeppelin/contracts@4.5.0/utils/Context.sol
 
 
 // OpenZeppelin Contracts v4.4.1 (utils/Context.sol)
@@ -27,7 +26,7 @@ abstract contract Context {
     }
 }
 
-// File: @openzeppelin/contracts/access/Ownable.sol
+// File: @openzeppelin/contracts@4.5.0/access/Ownable.sol
 
 
 // OpenZeppelin Contracts v4.4.1 (access/Ownable.sol)
@@ -105,7 +104,7 @@ abstract contract Ownable is Context {
     }
 }
 
-// File: @openzeppelin/contracts/token/ERC20/IERC20.sol
+// File: @openzeppelin/contracts@4.5.0/token/ERC20/IERC20.sol
 
 
 // OpenZeppelin Contracts (last updated v4.5.0) (token/ERC20/IERC20.sol)
@@ -190,7 +189,7 @@ interface IERC20 {
     event Approval(address indexed owner, address indexed spender, uint256 value);
 }
 
-// File: @openzeppelin/contracts/token/ERC20/extensions/IERC20Metadata.sol
+// File: @openzeppelin/contracts@4.5.0/token/ERC20/extensions/IERC20Metadata.sol
 
 
 // OpenZeppelin Contracts v4.4.1 (token/ERC20/extensions/IERC20Metadata.sol)
@@ -220,7 +219,7 @@ interface IERC20Metadata is IERC20 {
     function decimals() external view returns (uint8);
 }
 
-// File: @openzeppelin/contracts/token/ERC20/ERC20.sol
+// File: @openzeppelin/contracts@4.5.0/token/ERC20/ERC20.sol
 
 
 // OpenZeppelin Contracts (last updated v4.5.0) (token/ERC20/ERC20.sol)
@@ -605,7 +604,7 @@ contract ERC20 is Context, IERC20, IERC20Metadata {
     ) internal virtual {}
 }
 
-// File: alpCoin.sol
+// File: contract-49e5c7a12d.sol
 
 
 pragma solidity ^0.8.4;
@@ -613,11 +612,7 @@ pragma solidity ^0.8.4;
 
 
 contract AlpToken is ERC20, Ownable {
-   uint rate;
-   uint fixSupply;
     constructor() ERC20("alpToken", "ATK") {
-        rate= 1000;
-        fixSupply = 1000000 * 10 **18;
         _mint(msg.sender, 1000000 * 10 ** decimals());
     }
 
@@ -625,10 +620,9 @@ contract AlpToken is ERC20, Ownable {
         _mint(to, amount);
     }
 
-    function buyToken(address receiver) public payable{
-        require(msg.value >=1, "Thanks for the purchase of ATK");
-        uint amountBuy = msg.value * rate;
-        require (fixSupply >=(totalSupply() + amountBuy));
-            }     
-        
+    function buyToken(address receiver, uint256 amount) public returns(uint256) {
+        uint256 tokenAmount = amount * 1000;
+        _mint(receiver, tokenAmount);
+        return tokenAmount;
+    }
 }
